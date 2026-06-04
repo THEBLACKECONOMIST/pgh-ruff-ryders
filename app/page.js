@@ -49,13 +49,6 @@ export default function App() {
     if (sessionStorage.getItem('rr_admin') === '1') setAuthed(true)
   }, [])
 
-  const signOut = () => {
-    sessionStorage.removeItem('rr_admin')
-    setAuthed(false)
-  }
-
-  if (!authed) return <LoginScreen onLogin={() => { sessionStorage.setItem('rr_admin', '1'); setAuthed(true) }} />
-
   const load = useCallback(async () => {
     setLoading(true)
     const [{ data: m }, { data: e }, { data: a }] = await Promise.all([
@@ -70,7 +63,15 @@ export default function App() {
     setLoading(false)
   }, [])               // eslint-disable-line
 
-  useEffect(() => { load() }, [load])
+  // Only fetch data once the user is authenticated
+  useEffect(() => { if (authed) load() }, [authed, load])
+
+  const signOut = () => {
+    sessionStorage.removeItem('rr_admin')
+    setAuthed(false)
+  }
+
+  if (!authed) return <LoginScreen onLogin={() => { sessionStorage.setItem('rr_admin', '1'); setAuthed(true) }} />
 
   // Add event
   const addEvent = async () => {
