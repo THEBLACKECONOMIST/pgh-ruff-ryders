@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pittsburgh Ruff Ryders Inc. | Community Nonprofit</title>
+  <style>
+    :root {
+      --gold: #FFB612;
+      --dark-gold: #e0a000;
+      --blue: #003087;
+      --black: #0a0a0a;
+      --dark-bg: #111318;
+      --card-bg: #1a1e27;
+      --text: #e8e8e8;
+      --muted: #9aa0b0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--dark-bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 44px;
+      width: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+    }
+
+    .nav-logo-text {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+
+    .nav-logo-text span { color: #fff; display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      height: 100vh;
+      min-height: 600px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.72) 100%),
+        url('https://images.unsplash.com/photo-1598989055288-64238a307507?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat,
+        url('https://images.unsplash.com/photo-1648836607258-50419caf4618?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+    }
+
+    #hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+      margin-bottom: 0.5rem;
+    }
+
+    #hero h1 span { color: var(--gold); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(255,255,255,0.85);
+      margin: 1rem 0 2rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+
+    .btn-gold { background: var(--gold); color: #000; }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 1.5rem; }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-title span { color: var(--gold); }
+
+    .divider {
+      width: 56px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 1rem 0 2rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: #13161d; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,182,18,0.2);
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .mission-box {
+      background: var(--card-bg);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 2rem;
+    }
+
+    .mission-box blockquote {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .mission-box cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--gold);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--dark-bg); }
+
+    .gallery-section { margin-bottom: 4rem; }
+
+    .gallery-section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .category-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,182,18,0.12);
+      border: 1px solid rgba(255,182,18,0.35);
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+    }
+
+    .gallery-section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .gallery-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      max-width: 650px;
+    }
+
+    .photo-grid {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .photo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .photo-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .photo-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--card-bg);
+      cursor: pointer;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-card:hover img { transform: scale(1.04); }
+
+    .photo-card .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+
+    .photo-card:hover .overlay { opacity: 1; }
+
+    .photo-caption {
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* featured = tall first card */
+    .photo-grid.cols-3 .photo-card:first-child {
+      grid-row: span 2;
+      aspect-ratio: unset;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    #lightbox.active { display: flex; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+
+    #lightbox-close:hover { color: var(--gold); }
+
+    /* ── DONATE ── */
+    #donate {
+      background: linear-gradient(135deg, #0d1117 0%, #13161d 100%);
+      text-align: center;
+    }
+
+    .donate-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,182,18,0.25);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      max-width: 680px;
+      margin: 0 auto 3rem;
+    }
+
+    .donate-card p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+
+    .donate-methods {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .donate-method {
+      background: rgba(255,182,18,0.08);
+      border: 1px solid rgba(255,182,18,0.25);
+      border-radius: 8px;
+      padding: 0.75rem 1.5rem;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: #0d1117; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-info p { color: var(--muted); margin-bottom: 1.5rem; }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .contact-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,182,18,0.12);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    form { display: flex; flex-direction: column; gap: 1rem; }
+
+    form input, form textarea {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    form textarea { resize: vertical; min-height: 120px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080a0e;
+      border-top: 1px solid rgba(255,182,18,0.15);
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    footer p { color: var(--muted); font-size: 0.85rem; }
+    footer strong { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .photo-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+      .photo-grid.cols-3 .photo-card:first-child { grid-row: span 1; aspect-ratio: 4/3; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .photo-grid.cols-3, .photo-grid.cols-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <img src="images/logo.png" alt="Pittsburgh Ruff Ryders Logo" onerror="this.style.display='none'" />
+    <div class="nav-logo-text">Ruff Ryders <span>Pittsburgh, PA</span></div>
+  </a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#donate">Donate</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <img src="images/logo.png" alt="Pittsburgh Ruff Ryders" style="width:130px;height:130px;border-radius:50%;border:3px solid var(--gold);box-shadow:0 0 30px rgba(255,182,18,0.4);margin-bottom:1.25rem;object-fit:cover;" onerror="this.style.display='none'" />
+    <span class="hero-badge">Pittsburgh, PA &nbsp;·&nbsp; 501(c)(3) Nonprofit</span>
+    <h1>Pittsburgh<br><span>Ruff Ryders</span> Inc.</h1>
+    <p class="hero-sub">
+      Uniting Pittsburgh youth, families, and community through free programming,
+      preventive health access, and safe recreational spaces.
+    </p>
+    <div class="hero-buttons">
+      <a href="#donate" class="btn btn-gold">Support Our Mission</a>
+      <a href="#gallery" class="btn btn-outline">See Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">Built by the<br><span>Community</span>,<br>for the Community</h2>
+        <div class="divider"></div>
+        <p>
+          Pittsburgh Ruff Ryders Inc. is a Pittsburgh-based, all-volunteer 501(c)(3) nonprofit
+          dedicated to making a lasting difference in the lives of those who need it most.
+        </p>
+        <p>
+          We hit the streets day and night — distributing supplies to the homeless,
+          partnering with shelters like Light of Life Rescue Mission, and creating
+          opportunities for youth and families across every neighborhood in Pittsburgh.
+        </p>
+        <p>
+          Every action we take is powered entirely by volunteers who believe that
+          community is the most powerful force for change.
+        </p>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">All Volunteer</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">501c3</span>
+            <span class="stat-label">Certified Nonprofit</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">PGH</span>
+            <span class="stat-label">Pittsburgh Based</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">Free</span>
+            <span class="stat-label">All Programming</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="mission-box">
+          <blockquote>
+            "Pittsburgh Ruff Ryders Inc. is a Pittsburgh-based, all-volunteer 501(c)(3) nonprofit
+            dedicated to uniting Pittsburgh youth, families, and community through free programming,
+            preventive health access, and safe recreational spaces."
+          </blockquote>
+          <cite>— Official Mission Statement</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <p class="section-label">In Action</p>
+    <h2 class="section-title">Our Work <span>In the Community</span></h2>
+    <div class="divider"></div>
+
+    <!-- COMMUNITY OUTREACH -->
+    <div class="gallery-section">
+      <div class="gallery-section-header">
+        <span class="category-tag">🤝 Community Outreach</span>
+      </div>
+      <h3 class="gallery-section-title">Street Outreach &amp; Supply Drives</h3>
+      <p class="gallery-desc">
+        Volunteers hit the streets of downtown Pittsburgh at night — distributing blankets,
+        bags of essentials, and warm clothing to those experiencing homelessness. Partnering
+        directly with Light of Life Rescue Mission to deliver donations where they're needed most.
+      </p>
+      <div class="photo-grid cols-3">
+        <div class="photo-card" onclick="openLightbox(this)">
+          <img src="images/outreach-lightoflife-delivery.jpg" alt="Volunteers delivering bags of donations to Light of Life Rescue Mission" loading="lazy" />
+          <div class="overlay"><span class="photo-caption">Delivering supplies to Light of Life Rescue Mission</span></div>
+        </div>
+        <div class="photo-card" onclick="openLightbox(this)">
+          <img src="images/outreach-lightoflife-entrance.jpg" alt="Ruff Ryders volunteer at Light of Life entrance" loading="lazy" />
+          <div class="overlay"><span class="photo-caption">Light of Life Rescue Mission — 10 E North Ave</span></div>
+        </div>
+        <div class="photo-card" onclick="openLightbox(this)">
+          <img src="images/outreach-suv-unload.jpg" alt="Volunteers unloading blue supply bags from SUV" loading="lazy" />
+          <div class="overlay"><span class="photo-caption">Unloading supply bags for distribution</span></div>
+        </div>
+        <div class="photo-card" onclick="openLightbox(this)">
+          <img src="images/outreach-street-carry.jpg" alt="Volunteer carrying supplies through Pittsburgh neighborhood at night" loading="lazy" />
+          <div class="overlay"><span class="photo-caption">Moving supplies through the neighborhood</span></div>
+        </div>
+        <div class="photo-card" onclick="openLightbox(this)">
+          <img src="images/outreach-smithfield-group.jpg" alt="Ruff Ryders group on Smithfield Street outreach" loading="lazy" />
+          <div class="overlay"><span class="photo-caption">Smithfield Street outreach run</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER SECTIONS for future photos -->
+    <div class="gallery-section">
+      <div class="gallery-section-header">
+        <span class="category-tag">🧒 Youth Programs</span>
+      </div>
+      <h3 class="gallery-section-title">Youth &amp; Family Programming</h3>
+      <p class="gallery-desc">
+        Free events and activities bringing Pittsburgh youth and families together —
+        from organized recreation to mentorship and enrichment programs.
+      </p>
+      <div class="photo-grid cols-2">
+        <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
+          <div style="text-align:center; color: var(--muted); padding: 2rem;">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">📸</div>
+            <p style="font-size:0.85rem;">Youth program photos coming soon</p>
+          </div>
+        </div>
+        <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
+          <div style="text-align:center; color: var(--muted); padding: 2rem;">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">📸</div>
+            <p style="font-size:0.85rem;">Add your photos to the images folder</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-section">
+      <div class="gallery-section-header">
+        <span class="category-tag">❤️ Health &amp; Wellness</span>
+      </div>
+      <h3 class="gallery-section-title">Preventive Health Access</h3>
+      <p class="gallery-desc">
+        Connecting Pittsburgh residents with free preventive health resources,
+        health fairs, screenings, and wellness programming throughout the community.
+      </p>
+      <div class="photo-grid cols-2">
+        <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
+          <div style="text-align:center; color: var(--muted); padding: 2rem;">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">📸</div>
+            <p style="font-size:0.85rem;">Health event photos coming soon</p>
+          </div>
+        </div>
+        <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
+          <div style="text-align:center; color: var(--muted); padding: 2rem;">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">📸</div>
+            <p style="font-size:0.85rem;">Add your photos to the images folder</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DONATE -->
+<section id="donate">
+  <div class="container">
+    <p class="section-label">Make a Difference</p>
+    <h2 class="section-title">Support <span>Pittsburgh Ruff Ryders</span></h2>
+    <div class="divider" style="margin-left:auto; margin-right:auto;"></div>
+
+    <div class="donate-card">
+      <p>
+        100% of donations go directly to community programming — blankets, meals,
+        supplies, and free events for Pittsburgh youth and families. Every dollar
+        stays in Pittsburgh.
+      </p>
+      <a href="mailto:theblackeconomist20@gmail.com?subject=Donation%20Inquiry%20-%20Pittsburgh%20Ruff%20Ryders" class="btn btn-gold">
+        Contact Us to Donate
+      </a>
+      <div class="donate-methods">
+        <span class="donate-method">Cash App</span>
+        <span class="donate-method">Zelle</span>
+        <span class="donate-method">PayPal</span>
+        <span class="donate-method">Check</span>
+      </div>
+      <p style="margin-top: 1.5rem; font-size: 0.85rem;">
+        Pittsburgh Ruff Ryders Inc. is a registered 501(c)(3) nonprofit.<br>
+        Donations may be tax-deductible. Contact us for documentation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Contact <span>Us</span></h2>
+    <div class="divider"></div>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>
+          Want to volunteer, partner with us, or learn more about our programs?
+          We'd love to hear from you. All-volunteer means every hand counts.
+        </p>
+        <div class="contact-detail">
+          <div class="contact-icon">📧</div>
+          <a href="mailto:theblackeconomist20@gmail.com" style="color: var(--text); text-decoration:none;">
+            theblackeconomist20@gmail.com
+          </a>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <span>Pittsburgh, Pennsylvania</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">🤝</div>
+          <span>100% All-Volunteer Organization</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">⚖️</div>
+          <span>IRS 501(c)(3) Certified Nonprofit</span>
+        </div>
+      </div>
+
+      <form onsubmit="handleForm(event)">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <input type="text" placeholder="Subject (Volunteer / Donate / Partner / Other)" />
+        <textarea placeholder="Your message..."></textarea>
+        <button type="submit" class="btn btn-gold" style="border:none; cursor:pointer; text-align:center;">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    &copy; 2025 <strong>Pittsburgh Ruff Ryders Inc.</strong> &nbsp;|&nbsp;
+    All-Volunteer 501(c)(3) Nonprofit &nbsp;|&nbsp; Pittsburgh, PA
+  </p>
+  <p style="margin-top: 0.5rem;">
+    Built with ❤️ for the Pittsburgh community
+  </p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<script>
+  function openLightbox(card) {
+    const img = card.querySelector('img');
+    if (!img || img.naturalWidth === 0) return;
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Message Sent!';
+    btn.style.background = '#22c55e';
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
