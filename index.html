@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,6 +8,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
+    /* M-5: prefers-reduced-motion guard */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     :root {
       --gold: #FFB612;
       --dark-gold: #d49a00;
@@ -15,7 +24,7 @@
       --dark-bg: #0d0d0d;
       --card-bg: #161616;
       --text: #f0f0f0;
-      --muted: #aaaaaa;
+      --muted: #b8b8b8; /* M-1: raised from #aaaaaa */
       --font-heading: 'Barlow Condensed', 'Impact', sans-serif;
       --font-body: 'Barlow', 'Segoe UI', system-ui, sans-serif;
     }
@@ -37,7 +46,33 @@
       letter-spacing: 0.04em;
     }
 
-    /* â”€â”€ NAV â”€â”€ */
+    /* M-3: Skip navigation link */
+    .skip-nav {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--gold);
+      color: #000;
+      font-weight: 800;
+      padding: 0.5rem 1rem;
+      border-radius: 0 0 4px 4px;
+      z-index: 9999;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .skip-nav:focus { top: 0; }
+
+    /* M-4: Global focus-visible rules */
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    /* -- NAV -- */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -77,7 +112,15 @@
       text-transform: uppercase;
     }
 
-    .nav-logo-text span { color: #fff; display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-body); }
+    .nav-logo-text span {
+      color: #fff;
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+    }
 
     nav ul {
       list-style: none;
@@ -98,7 +141,28 @@
 
     nav ul a:hover { color: var(--gold); }
 
-    /* â”€â”€ HERO â”€â”€ */
+    /* C-2: Hamburger button */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .hamburger:hover span { background: var(--gold); }
+
+    /* -- HERO -- */
     #hero {
       height: 100vh;
       min-height: 600px;
@@ -115,13 +179,19 @@
     .hero-bg {
       position: absolute;
       inset: 0;
+      /* M-7: single background image, dead second removed */
       background:
         linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.72) 100%),
-        url('https://images.unsplash.com/photo-1598989055288-64238a307507?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat,
-        url('https://images.unsplash.com/photo-1648836607258-50419caf4618?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+        url('https://images.unsplash.com/photo-1598989055288-64238a307507?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
     }
 
-    .hero-content { position: relative; z-index: 2; max-width: 900px; width: 100%; text-align: center; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+    }
 
     .hero-badge {
       display: inline-block;
@@ -137,28 +207,26 @@
       margin-bottom: 1.25rem;
     }
 
+    /* M-2: hero h1 white, M-8: no white-space:nowrap */
     #hero h1 {
       font-family: var(--font-heading);
-      font-size: clamp(1.6rem, 3.8vw, 3rem);
+      font-size: clamp(2rem, 6vw, 4.5rem);
       font-weight: 900;
-      line-height: 1.1;
-      color: #b0b0b0;
+      line-height: 1.05;
+      color: #ffffff;
       text-shadow: 0 2px 24px rgba(0,0,0,0.9);
       margin-bottom: 0.5rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      white-space: nowrap;
     }
-    #hero h1 span { color: #b0b0b0 !important; display: inline; }
+    #hero h1 span { color: var(--gold); }
 
     .hero-sub {
       font-family: var(--font-body);
       font-size: clamp(1rem, 2.2vw, 1.2rem);
       color: rgba(255,255,255,0.9);
-      margin: 1rem 0 2rem;
+      margin: 1rem auto 2rem;
       max-width: 620px;
-      margin-left: auto;
-      margin-right: auto;
       font-weight: 500;
     }
 
@@ -175,17 +243,17 @@
       border-radius: 3px;
       text-decoration: none;
       transition: transform 0.15s, box-shadow 0.15s;
+      border: none;
+      cursor: pointer;
     }
 
     .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
-
     .btn-gold { background: var(--gold); color: #000; }
     .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
     .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* â”€â”€ SECTIONS â”€â”€ */
+    /* -- SECTIONS -- */
     section { padding: 5rem 1.5rem; }
-
     .container { max-width: 1100px; margin: 0 auto; }
 
     .section-label {
@@ -219,7 +287,7 @@
       margin: 1rem 0 2rem;
     }
 
-    /* â”€â”€ ABOUT â”€â”€ */
+    /* -- ABOUT -- */
     #about { background: #13161d; }
 
     .about-grid {
@@ -229,11 +297,7 @@
       align-items: center;
     }
 
-    .about-text p {
-      color: var(--muted);
-      margin-bottom: 1rem;
-      font-size: 1.05rem;
-    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1.05rem; }
 
     .stat-grid {
       display: grid;
@@ -297,9 +361,8 @@
       text-transform: uppercase;
     }
 
-    /* â”€â”€ GALLERY â”€â”€ */
+    /* -- GALLERY -- */
     #gallery { background: var(--dark-bg); }
-
     .gallery-section { margin-bottom: 4rem; }
 
     .gallery-section-header {
@@ -341,14 +404,11 @@
       max-width: 650px;
     }
 
-    .photo-grid {
-      display: grid;
-      gap: 0.75rem;
-    }
-
+    .photo-grid { display: grid; gap: 0.75rem; }
     .photo-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
     .photo-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
 
+    /* C-3: photo-card as <button> */
     .photo-card {
       position: relative;
       border-radius: 8px;
@@ -356,6 +416,10 @@
       aspect-ratio: 4/3;
       background: var(--card-bg);
       cursor: pointer;
+      padding: 0;
+      border: none;
+      display: block;
+      width: 100%;
     }
 
     .photo-card img {
@@ -363,6 +427,7 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
+      display: block;
     }
 
     .photo-card:hover img { transform: scale(1.04); }
@@ -378,21 +443,17 @@
       padding: 1rem;
     }
 
-    .photo-card:hover .overlay { opacity: 1; }
+    .photo-card:hover .overlay,
+    .photo-card:focus-visible .overlay { opacity: 1; }
 
-    .photo-caption {
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
+    .photo-caption { color: #fff; font-size: 0.85rem; font-weight: 600; }
 
-    /* featured = tall first card */
     .photo-grid.cols-3 .photo-card:first-child {
       grid-row: span 2;
       aspect-ratio: unset;
     }
 
-    /* â”€â”€ LIGHTBOX â”€â”€ */
+    /* -- LIGHTBOX -- C-4: role=dialog, aria-modal, focus trap */
     #lightbox {
       display: none;
       position: fixed;
@@ -422,11 +483,13 @@
       background: none;
       border: none;
       line-height: 1;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
     }
 
     #lightbox-close:hover { color: var(--gold); }
 
-    /* â”€â”€ DONATE â”€â”€ */
+    /* -- DONATE -- */
     #donate {
       background: linear-gradient(135deg, #0d1117 0%, #13161d 100%);
       text-align: center;
@@ -441,11 +504,7 @@
       margin: 0 auto 3rem;
     }
 
-    .donate-card p {
-      color: var(--muted);
-      margin-bottom: 2rem;
-      font-size: 1.05rem;
-    }
+    .donate-card p { color: var(--muted); margin-bottom: 2rem; font-size: 1.05rem; }
 
     .donate-methods {
       display: flex;
@@ -468,7 +527,7 @@
       text-transform: uppercase;
     }
 
-    /* â”€â”€ CONTACT â”€â”€ */
+    /* -- CONTACT -- */
     #contact { background: #0d1117; }
 
     .contact-grid {
@@ -489,15 +548,28 @@
       font-size: 0.95rem;
     }
 
+    /* Mi-3: contact-icon 44x44px */
     .contact-icon {
-      width: 36px; height: 36px;
+      width: 44px; height: 44px;
       background: rgba(255,182,18,0.12);
       border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 1.1rem;
       flex-shrink: 0;
+    }
+
+    /* C-1: label + input styling */
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+
+    .form-group label {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     form { display: flex; flex-direction: column; gap: 1rem; }
@@ -520,7 +592,16 @@
 
     form textarea { resize: vertical; min-height: 120px; }
 
-    /* â”€â”€ FOOTER â”€â”€ */
+    /* C-5: aria-live form success */
+    #form-status {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      min-height: 1.4em;
+      color: #22c55e;
+    }
+
+    /* -- FOOTER -- */
     footer {
       background: #080a0e;
       border-top: 1px solid rgba(255,182,18,0.15);
@@ -531,9 +612,21 @@
     footer p { color: var(--muted); font-size: 0.85rem; }
     footer strong { color: var(--gold); }
 
-    /* â”€â”€ RESPONSIVE â”€â”€ */
+    /* -- RESPONSIVE -- */
     @media (max-width: 768px) {
-      nav ul { display: none; }
+      /* C-2: show hamburger, hide nav links by default */
+      .hamburger { display: flex; }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 64px; left: 0; right: 0;
+        background: rgba(10,10,10,0.98);
+        padding: 1rem 2rem 1.5rem;
+        gap: 1rem;
+        border-bottom: 2px solid var(--gold);
+      }
+      nav ul.open { display: flex; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .contact-grid { grid-template-columns: 1fr; }
       .photo-grid.cols-3 { grid-template-columns: 1fr 1fr; }
@@ -548,13 +641,20 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<!-- M-3: Skip nav -->
+<a href="#main-content" class="skip-nav">Skip to main content</a>
+
+<!-- NAV -- Mi-1: aria-label -->
+<nav aria-label="Main navigation">
   <a href="#hero" class="nav-logo">
     <img src="images/logo.jpg" alt="Pittsburgh Ruff Ryders Logo" onerror="this.style.display='none'" />
     <div class="nav-logo-text">Ruff Ryders <span>Pittsburgh, PA</span></div>
   </a>
-  <ul>
+  <!-- C-2: hamburger button -->
+  <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav(this)">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#donate">Donate</a></li>
@@ -562,13 +662,19 @@
   </ul>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
+<!-- M-3: <main> wrapper -->
+<main id="main-content">
+
+<!-- HERO -- Mi-2: aria-labelledby -->
+<section id="hero" aria-labelledby="hero-heading">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-content">
-    <img src="images/logo.jpg" alt="Pittsburgh Ruff Ryders" style="display:block;margin:0 auto 1.5rem;width:240px;height:240px;border-radius:50%;border:4px solid var(--gold);box-shadow:0 0 60px rgba(255,182,18,0.6), 0 0 120px rgba(255,182,18,0.25);object-fit:cover;" onerror="this.style.display='none'" />
+    <img src="images/logo.jpg" alt="Pittsburgh Ruff Ryders circular logo"
+      style="display:block;margin:0 auto 1.5rem;width:240px;height:240px;border-radius:50%;border:4px solid var(--gold);box-shadow:0 0 60px rgba(255,182,18,0.6), 0 0 120px rgba(255,182,18,0.25);object-fit:cover;"
+      onerror="this.style.display='none'" />
     <span class="hero-badge">Pittsburgh, PA &nbsp;&bull;&nbsp; 501(c)(3) Nonprofit</span>
-    <h1 style="white-space:nowrap;color:#b0b0b0;">Pittsburgh <span style="color:#b0b0b0;">Ruff Ryders</span></h1>
+    <!-- M-2: white/gold color, M-8: no white-space:nowrap -->
+    <h1 id="hero-heading">Pittsburgh <span>Ruff Ryders</span></h1>
     <p class="hero-sub">
       Uniting Pittsburgh youth, families, and community through free programming,
       preventive health access, and safe recreational spaces.
@@ -581,19 +687,19 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" aria-labelledby="about-heading">
   <div class="container">
     <div class="about-grid">
       <div class="about-text">
         <p class="section-label">Who We Are</p>
-        <h2 class="section-title">Built by the<br><span>Community</span>,<br>for the Community</h2>
+        <h2 id="about-heading" class="section-title">Built by the<br><span>Community</span>,<br>for the Community</h2>
         <div class="divider"></div>
         <p>
           Pittsburgh Ruff Ryders Inc. is a Pittsburgh-based, all-volunteer 501(c)(3) nonprofit
           dedicated to making a lasting difference in the lives of those who need it most.
         </p>
         <p>
-          We hit the streets day and night â€” distributing supplies to the homeless,
+          We hit the streets day and night &mdash; distributing supplies to the homeless,
           partnering with shelters like Light of Life Rescue Mission, and creating
           opportunities for youth and families across every neighborhood in Pittsburgh.
         </p>
@@ -623,11 +729,11 @@
       <div>
         <div class="mission-box">
           <blockquote>
-            "Pittsburgh Ruff Ryders Inc. is a Pittsburgh-based, all-volunteer 501(c)(3) nonprofit
+            &ldquo;Pittsburgh Ruff Ryders Inc. is a Pittsburgh-based, all-volunteer 501(c)(3) nonprofit
             dedicated to uniting Pittsburgh youth, families, and community through free programming,
-            preventive health access, and safe recreational spaces."
+            preventive health access, and safe recreational spaces.&rdquo;
           </blockquote>
-          <cite>â€” Official Mission Statement</cite>
+          <cite>&mdash; Official Mission Statement</cite>
         </div>
       </div>
     </div>
@@ -635,76 +741,79 @@
 </section>
 
 <!-- GALLERY -->
-<section id="gallery">
+<section id="gallery" aria-labelledby="gallery-heading">
   <div class="container">
     <p class="section-label">In Action</p>
-    <h2 class="section-title">Our Work <span>In the Community</span></h2>
+    <h2 id="gallery-heading" class="section-title">Our Work <span>In the Community</span></h2>
     <div class="divider"></div>
 
     <!-- COMMUNITY OUTREACH -->
     <div class="gallery-section">
       <div class="gallery-section-header">
-        <span class="category-tag">ðŸ¤ Community Outreach</span>
+        <!-- M-6: aria-hidden on decorative emoji -->
+        <span class="category-tag"><span aria-hidden="true">🤝</span> Community Outreach</span>
       </div>
       <h3 class="gallery-section-title">Street Outreach &amp; Supply Drives</h3>
       <p class="gallery-desc">
-        Volunteers hit the streets of downtown Pittsburgh at night â€” distributing blankets,
+        Volunteers hit the streets of downtown Pittsburgh at night &mdash; distributing blankets,
         bags of essentials, and warm clothing to those experiencing homelessness. Partnering
         directly with Light of Life Rescue Mission to deliver donations where they're needed most.
       </p>
+      <!-- C-3: photo-cards as <button> elements -->
       <div class="photo-grid cols-3">
-        <div class="photo-card" onclick="openLightbox(this)">
-          <img src="images/outreach-lightoflife-delivery.jpg" alt="Volunteers delivering bags of donations to Light of Life Rescue Mission" loading="lazy" />
-          <div class="overlay"><span class="photo-caption">Delivering supplies to Light of Life Rescue Mission</span></div>
-        </div>
-        <div class="photo-card" onclick="openLightbox(this)">
-          <img src="images/outreach-lightoflife-entrance.jpg" alt="Ruff Ryders volunteer at Light of Life entrance" loading="lazy" />
-          <div class="overlay"><span class="photo-caption">Light of Life Rescue Mission â€” 10 E North Ave</span></div>
-        </div>
-        <div class="photo-card" onclick="openLightbox(this)">
-          <img src="images/outreach-suv-unload.jpg" alt="Volunteers unloading blue supply bags from SUV" loading="lazy" />
-          <div class="overlay"><span class="photo-caption">Unloading supply bags for distribution</span></div>
-        </div>
-        <div class="photo-card" onclick="openLightbox(this)">
-          <img src="images/outreach-street-carry.jpg" alt="Volunteer carrying supplies through Pittsburgh neighborhood at night" loading="lazy" />
-          <div class="overlay"><span class="photo-caption">Moving supplies through the neighborhood</span></div>
-        </div>
-        <div class="photo-card" onclick="openLightbox(this)">
-          <img src="images/outreach-smithfield-group.jpg" alt="Ruff Ryders group on Smithfield Street outreach" loading="lazy" />
-          <div class="overlay"><span class="photo-caption">Smithfield Street outreach run</span></div>
-        </div>
+        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Delivering supplies to Light of Life Rescue Mission">
+          <img src="images/outreach-lightoflife-delivery.jpg" alt="Volunteers carrying black bags of donations into Light of Life Rescue Mission at night" loading="lazy" />
+          <div class="overlay" aria-hidden="true"><span class="photo-caption">Delivering supplies to Light of Life Rescue Mission</span></div>
+        </button>
+        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Light of Life Rescue Mission entrance">
+          <img src="images/outreach-lightoflife-entrance.jpg" alt="Ruff Ryders volunteers at the Light of Life Rescue Mission entrance on 10 E North Ave" loading="lazy" />
+          <div class="overlay" aria-hidden="true"><span class="photo-caption">Light of Life Rescue Mission &mdash; 10 E North Ave</span></div>
+        </button>
+        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Unloading supply bags from SUV">
+          <img src="images/outreach-suv-unload.jpg" alt="Volunteers unloading blue supply bags from an SUV on a downtown Pittsburgh street at night" loading="lazy" />
+          <div class="overlay" aria-hidden="true"><span class="photo-caption">Unloading supply bags for distribution</span></div>
+        </button>
+        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Moving supplies through the neighborhood">
+          <img src="images/outreach-street-carry.jpg" alt="Volunteer carrying large black bags through a Pittsburgh neighborhood at night" loading="lazy" />
+          <div class="overlay" aria-hidden="true"><span class="photo-caption">Moving supplies through the neighborhood</span></div>
+        </button>
+        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Smithfield Street outreach run">
+          <img src="images/outreach-smithfield-group.jpg" alt="Ruff Ryders group gathered on Smithfield Street during a nighttime outreach run" loading="lazy" />
+          <div class="overlay" aria-hidden="true"><span class="photo-caption">Smithfield Street outreach run</span></div>
+        </button>
       </div>
     </div>
 
-    <!-- PLACEHOLDER SECTIONS for future photos -->
+    <!-- YOUTH PROGRAMS -->
     <div class="gallery-section">
       <div class="gallery-section-header">
-        <span class="category-tag">ðŸ§’ Youth Programs</span>
+        <span class="category-tag"><span aria-hidden="true">🧒</span> Youth Programs</span>
       </div>
       <h3 class="gallery-section-title">Youth &amp; Family Programming</h3>
       <p class="gallery-desc">
-        Free events and activities bringing Pittsburgh youth and families together â€”
+        Free events and activities bringing Pittsburgh youth and families together &mdash;
         from organized recreation to mentorship and enrichment programs.
       </p>
       <div class="photo-grid cols-2">
-        <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center; color: var(--muted); padding: 2rem;">
-            <div style="font-size:2rem; margin-bottom:0.5rem;">ðŸ“¸</div>
+        <div class="photo-card" style="background:#1e2230;display:flex;align-items:center;justify-content:center;" aria-label="Youth program photos coming soon">
+          <div style="text-align:center;color:var(--muted);padding:2rem;">
+            <div style="font-size:2rem;margin-bottom:0.5rem;" aria-hidden="true">📸</div>
             <p style="font-size:0.85rem;">Youth program photos coming soon</p>
           </div>
         </div>
-        <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center; color: var(--muted); padding: 2rem;">
-            <div style="font-size:2rem; margin-bottom:0.5rem;">ðŸ“¸</div>
+        <div class="photo-card" style="background:#1e2230;display:flex;align-items:center;justify-content:center;" aria-label="More photos coming soon">
+          <div style="text-align:center;color:var(--muted);padding:2rem;">
+            <div style="font-size:2rem;margin-bottom:0.5rem;" aria-hidden="true">📸</div>
             <p style="font-size:0.85rem;">Add your photos to the images folder</p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- HEALTH & WELLNESS -->
     <div class="gallery-section">
       <div class="gallery-section-header">
-        <span class="category-tag">â¤ï¸ Health &amp; Wellness</span>
+        <span class="category-tag"><span aria-hidden="true">❤️</span> Health &amp; Wellness</span>
       </div>
       <h3 class="gallery-section-title">Preventive Health Access</h3>
       <p class="gallery-desc">
@@ -712,15 +821,15 @@
         health fairs, screenings, and wellness programming throughout the community.
       </p>
       <div class="photo-grid cols-2">
-        <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center; color: var(--muted); padding: 2rem;">
-            <div style="font-size:2rem; margin-bottom:0.5rem;">ðŸ“¸</div>
+        <div class="photo-card" style="background:#1e2230;display:flex;align-items:center;justify-content:center;" aria-label="Health event photos coming soon">
+          <div style="text-align:center;color:var(--muted);padding:2rem;">
+            <div style="font-size:2rem;margin-bottom:0.5rem;" aria-hidden="true">📸</div>
             <p style="font-size:0.85rem;">Health event photos coming soon</p>
           </div>
         </div>
-        <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
-          <div style="text-align:center; color: var(--muted); padding: 2rem;">
-            <div style="font-size:2rem; margin-bottom:0.5rem;">ðŸ“¸</div>
+        <div class="photo-card" style="background:#1e2230;display:flex;align-items:center;justify-content:center;" aria-label="More photos coming soon">
+          <div style="text-align:center;color:var(--muted);padding:2rem;">
+            <div style="font-size:2rem;margin-bottom:0.5rem;" aria-hidden="true">📸</div>
             <p style="font-size:0.85rem;">Add your photos to the images folder</p>
           </div>
         </div>
@@ -731,17 +840,15 @@
 </section>
 
 <!-- DONATE -->
-<section id="donate">
+<section id="donate" aria-labelledby="donate-heading">
   <div class="container">
     <p class="section-label">Make a Difference</p>
-    <h2 class="section-title">Support <span>Pittsburgh Ruff Ryders</span></h2>
-    <div class="divider" style="margin-left:auto; margin-right:auto;"></div>
-
+    <h2 id="donate-heading" class="section-title">Support <span>Pittsburgh Ruff Ryders</span></h2>
+    <div class="divider" style="margin-left:auto;margin-right:auto;"></div>
     <div class="donate-card">
       <p>
-        100% of donations go directly to community programming â€” blankets, meals,
-        supplies, and free events for Pittsburgh youth and families. Every dollar
-        stays in Pittsburgh.
+        100% of donations go directly to community programming &mdash; blankets, meals,
+        supplies, and free events for Pittsburgh youth and families. Every dollar stays in Pittsburgh.
       </p>
       <a href="mailto:ruffryders412@gmail.com?subject=Donation%20Inquiry%20-%20Pittsburgh%20Ruff%20Ryders" class="btn btn-gold">
         Contact Us to Donate
@@ -752,7 +859,7 @@
         <span class="donate-method">PayPal</span>
         <span class="donate-method">Check</span>
       </div>
-      <p style="margin-top: 1.5rem; font-size: 0.85rem;">
+      <p style="margin-top:1.5rem;font-size:0.85rem;">
         Pittsburgh Ruff Ryders Inc. is a registered 501(c)(3) nonprofit.<br>
         Donations may be tax-deductible. Contact us for documentation.
       </p>
@@ -761,44 +868,59 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" aria-labelledby="contact-heading">
   <div class="container">
     <p class="section-label">Get In Touch</p>
-    <h2 class="section-title">Contact <span>Us</span></h2>
+    <h2 id="contact-heading" class="section-title">Contact <span>Us</span></h2>
     <div class="divider"></div>
-
     <div class="contact-grid">
       <div class="contact-info">
         <p>
           Want to volunteer, partner with us, or learn more about our programs?
-          We'd love to hear from you. All-volunteer means every hand counts.
+          We&rsquo;d love to hear from you. All-volunteer means every hand counts.
         </p>
         <div class="contact-detail">
-          <div class="contact-icon">ðŸ“§</div>
-          <a href="mailto:ruffryders412@gmail.com" style="color: var(--text); text-decoration:none;">
+          <!-- M-6: aria-hidden on emoji -->
+          <div class="contact-icon" aria-hidden="true">📧</div>
+          <a href="mailto:ruffryders412@gmail.com" style="color:var(--text);text-decoration:none;">
             ruffryders412@gmail.com
           </a>
         </div>
         <div class="contact-detail">
-          <div class="contact-icon">ðŸ“</div>
+          <div class="contact-icon" aria-hidden="true">📍</div>
           <span>Pittsburgh, Pennsylvania</span>
         </div>
         <div class="contact-detail">
-          <div class="contact-icon">ðŸ¤</div>
+          <div class="contact-icon" aria-hidden="true">🤝</div>
           <span>100% All-Volunteer Organization</span>
         </div>
         <div class="contact-detail">
-          <div class="contact-icon">âš–ï¸</div>
+          <div class="contact-icon" aria-hidden="true">⚖️</div>
           <span>IRS 501(c)(3) Certified Nonprofit</span>
         </div>
       </div>
 
-      <form onsubmit="handleForm(event)">
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <input type="text" placeholder="Subject (Volunteer / Donate / Partner / Other)" />
-        <textarea placeholder="Your message..."></textarea>
-        <button type="submit" class="btn btn-gold" style="border:none; cursor:pointer; text-align:center;">
+      <!-- C-1: label elements on all inputs, Mi-4: autocomplete -->
+      <form onsubmit="handleForm(event)" novalidate>
+        <div class="form-group">
+          <label for="contact-name">Your Name</label>
+          <input id="contact-name" type="text" name="name" placeholder="Jane Smith" required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Your Email</label>
+          <input id="contact-email" type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="contact-subject">Subject</label>
+          <input id="contact-subject" type="text" name="subject" placeholder="Volunteer / Donate / Partner / Other" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" placeholder="Tell us how you'd like to help or get involved..."></textarea>
+        </div>
+        <!-- C-5: aria-live region for success -->
+        <div id="form-status" aria-live="polite" aria-atomic="true"></div>
+        <button type="submit" class="btn btn-gold" style="border:none;cursor:pointer;text-align:center;">
           Send Message
         </button>
       </form>
@@ -806,55 +928,117 @@
   </div>
 </section>
 
+</main><!-- end #main-content -->
+
 <!-- FOOTER -->
 <footer>
   <p>
     &copy; 2025 <strong>Pittsburgh Ruff Ryders Inc.</strong> &nbsp;|&nbsp;
     All-Volunteer 501(c)(3) Nonprofit &nbsp;|&nbsp; Pittsburgh, PA
   </p>
-  <p style="margin-top: 0.5rem;">
-    Built with â¤ï¸ for the Pittsburgh community
+  <p style="margin-top:0.5rem;">
+    Built with <span aria-hidden="true">❤️</span><span class="sr-only">love</span> for the Pittsburgh community
   </p>
 </footer>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="closeLightbox()">
-  <button id="lightbox-close" onclick="closeLightbox()">&times;</button>
+<!-- C-4: LIGHTBOX with role=dialog, aria-modal, focus trap -->
+<div id="lightbox"
+     role="dialog"
+     aria-modal="true"
+     aria-label="Photo lightbox"
+     aria-hidden="true">
+  <button id="lightbox-close" aria-label="Close photo lightbox" onclick="closeLightbox()">&times;</button>
   <img id="lightbox-img" src="" alt="" />
 </div>
 
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
 <script>
+  /* C-2: Hamburger nav toggle */
+  function toggleNav(btn) {
+    const ul = document.getElementById('nav-links');
+    const open = ul.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+  }
+  // Close mobile nav on link click
+  document.querySelectorAll('#nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav-links').classList.remove('open');
+      const btn = document.querySelector('.hamburger');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open navigation menu');
+    });
+  });
+
+  /* C-4: Lightbox with focus trap */
+  let lastFocused = null;
+
   function openLightbox(card) {
     const img = card.querySelector('img');
     if (!img || img.naturalWidth === 0) return;
+    lastFocused = card;
+    const lb = document.getElementById('lightbox');
     document.getElementById('lightbox-img').src = img.src;
     document.getElementById('lightbox-img').alt = img.alt;
-    document.getElementById('lightbox').classList.add('active');
+    lb.classList.add('active');
+    lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-close').focus();
   }
 
   function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
+    const lb = document.getElementById('lightbox');
+    lb.classList.remove('active');
+    lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
   }
 
-  document.addEventListener('keydown', e => {
+  // Focus trap inside lightbox
+  document.getElementById('lightbox').addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      document.getElementById('lightbox-close').focus();
+    }
     if (e.key === 'Escape') closeLightbox();
   });
 
+  // Close on backdrop click
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  /* C-5: Form with aria-live success */
   function handleForm(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('button');
-    btn.textContent = 'Message Sent!';
-    btn.style.background = '#22c55e';
+    const status = document.getElementById('form-status');
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    status.textContent = '';
+    // Simulate send
     setTimeout(() => {
-      btn.textContent = 'Send Message';
-      btn.style.background = '';
-      e.target.reset();
-    }, 3000);
+      status.textContent = '✅ Message sent! We\'ll be in touch soon.';
+      btn.textContent = 'Sent!';
+      setTimeout(() => {
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        status.textContent = '';
+        e.target.reset();
+      }, 4000);
+    }, 600);
   }
 </script>
 
 </body>
 </html>
-
