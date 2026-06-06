@@ -1,19 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pittsburgh Ruff Ryders Inc. | Community Nonprofit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --gold: #FFB612;
-      --dark-gold: #e0a000;
-      --blue: #003087;
+      --dark-gold: #d49a00;
       --black: #0a0a0a;
-      --dark-bg: #111318;
-      --card-bg: #1a1e27;
-      --text: #e8e8e8;
-      --muted: #9aa0b0;
+      --dark-bg: #0d0d0d;
+      --card-bg: #161616;
+      --text: #f0f0f0;
+      --muted: #aaaaaa;
+      --font-heading: 'Barlow Condensed', 'Impact', sans-serif;
+      --font-body: 'Barlow', 'Segoe UI', system-ui, sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,13 +25,19 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-family: var(--font-body);
       background: var(--dark-bg);
       color: var(--text);
       line-height: 1.6;
     }
 
-    /* ── NAV ── */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* â”€â”€ NAV â”€â”€ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -58,14 +68,16 @@
     }
 
     .nav-logo-text {
-      font-size: 1.05rem;
-      font-weight: 800;
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 900;
       color: var(--gold);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       line-height: 1.1;
+      text-transform: uppercase;
     }
 
-    .nav-logo-text span { color: #fff; display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .nav-logo-text span { color: #fff; display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; font-family: var(--font-body); }
 
     nav ul {
       list-style: none;
@@ -74,18 +86,19 @@
     }
 
     nav ul a {
-      color: var(--text);
+      font-family: var(--font-heading);
+      color: #fff;
       text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
 
     nav ul a:hover { color: var(--gold); }
 
-    /* ── HERO ── */
+    /* â”€â”€ HERO â”€â”€ */
     #hero {
       height: 100vh;
       min-height: 600px;
@@ -108,51 +121,58 @@
         url('https://images.unsplash.com/photo-1648836607258-50419caf4618?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
     }
 
-    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; width: 100%; display: flex; flex-direction: column; align-items: center; }
 
     .hero-badge {
       display: inline-block;
       background: var(--gold);
       color: #000;
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 0.35rem 1rem;
+      padding: 0.4rem 1.2rem;
       border-radius: 2px;
       margin-bottom: 1.25rem;
     }
 
     #hero h1 {
-      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 8vw, 5.5rem);
       font-weight: 900;
-      line-height: 1.1;
+      line-height: 1.0;
       color: #fff;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.9);
       margin-bottom: 0.5rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
-    #hero h1 span { color: var(--gold); }
+    #hero h1 span { color: var(--gold); display: block; }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: rgba(255,255,255,0.85);
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: rgba(255,255,255,0.9);
       margin: 1rem 0 2rem;
-      max-width: 640px;
+      max-width: 620px;
       margin-left: auto;
       margin-right: auto;
+      font-weight: 500;
     }
 
     .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
     .btn {
       display: inline-block;
-      padding: 0.85rem 2rem;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      padding: 0.85rem 2.2rem;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      border-radius: 4px;
+      border-radius: 3px;
       text-decoration: none;
       transition: transform 0.15s, box-shadow 0.15s;
     }
@@ -163,25 +183,30 @@
     .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
     .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-    /* ── SECTIONS ── */
+    /* â”€â”€ SECTIONS â”€â”€ */
     section { padding: 5rem 1.5rem; }
 
     .container { max-width: 1100px; margin: 0 auto; }
 
     .section-label {
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 0.5rem;
     }
 
     .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
       font-weight: 900;
-      line-height: 1.15;
+      line-height: 1.05;
       margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #fff;
     }
 
     .section-title span { color: var(--gold); }
@@ -194,7 +219,7 @@
       margin: 1rem 0 2rem;
     }
 
-    /* ── ABOUT ── */
+    /* â”€â”€ ABOUT â”€â”€ */
     #about { background: #13161d; }
 
     .about-grid {
@@ -226,17 +251,22 @@
     }
 
     .stat-num {
-      font-size: 2rem;
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
       font-weight: 900;
       color: var(--gold);
       display: block;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .stat-label {
-      font-size: 0.8rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
+      font-weight: 600;
     }
 
     .mission-box {
@@ -247,22 +277,27 @@
     }
 
     .mission-box blockquote {
+      font-family: var(--font-body);
       font-size: 1.05rem;
       font-style: italic;
       color: var(--text);
-      line-height: 1.75;
+      line-height: 1.8;
+      font-weight: 500;
     }
 
     .mission-box cite {
       display: block;
       margin-top: 1rem;
-      font-size: 0.85rem;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
       color: var(--gold);
       font-style: normal;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
-    /* ── GALLERY ── */
+    /* â”€â”€ GALLERY â”€â”€ */
     #gallery { background: var(--dark-bg); }
 
     .gallery-section { margin-bottom: 4rem; }
@@ -279,20 +314,24 @@
       align-items: center;
       gap: 0.5rem;
       background: rgba(255,182,18,0.12);
-      border: 1px solid rgba(255,182,18,0.35);
+      border: 1px solid rgba(255,182,18,0.4);
       color: var(--gold);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 0.4rem 1rem;
+      padding: 0.4rem 1.1rem;
       border-radius: 20px;
     }
 
     .gallery-section-title {
-      font-size: 1.5rem;
-      font-weight: 800;
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 900;
       color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .gallery-desc {
@@ -353,7 +392,7 @@
       aspect-ratio: unset;
     }
 
-    /* ── LIGHTBOX ── */
+    /* â”€â”€ LIGHTBOX â”€â”€ */
     #lightbox {
       display: none;
       position: fixed;
@@ -387,7 +426,7 @@
 
     #lightbox-close:hover { color: var(--gold); }
 
-    /* ── DONATE ── */
+    /* â”€â”€ DONATE â”€â”€ */
     #donate {
       background: linear-gradient(135deg, #0d1117 0%, #13161d 100%);
       text-align: center;
@@ -418,15 +457,18 @@
 
     .donate-method {
       background: rgba(255,182,18,0.08);
-      border: 1px solid rgba(255,182,18,0.25);
-      border-radius: 8px;
+      border: 1px solid rgba(255,182,18,0.3);
+      border-radius: 6px;
       padding: 0.75rem 1.5rem;
       color: var(--gold);
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
-    /* ── CONTACT ── */
+    /* â”€â”€ CONTACT â”€â”€ */
     #contact { background: #0d1117; }
 
     .contact-grid {
@@ -478,7 +520,7 @@
 
     form textarea { resize: vertical; min-height: 120px; }
 
-    /* ── FOOTER ── */
+    /* â”€â”€ FOOTER â”€â”€ */
     footer {
       background: #080a0e;
       border-top: 1px solid rgba(255,182,18,0.15);
@@ -489,7 +531,7 @@
     footer p { color: var(--muted); font-size: 0.85rem; }
     footer strong { color: var(--gold); }
 
-    /* ── RESPONSIVE ── */
+    /* â”€â”€ RESPONSIVE â”€â”€ */
     @media (max-width: 768px) {
       nav ul { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -509,7 +551,7 @@
 <!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">
-    <img src="images/logo.png" alt="Pittsburgh Ruff Ryders Logo" onerror="this.style.display='none'" />
+    <img src="images/logo.jpg" alt="Pittsburgh Ruff Ryders Logo" onerror="this.style.display='none'" />
     <div class="nav-logo-text">Ruff Ryders <span>Pittsburgh, PA</span></div>
   </a>
   <ul>
@@ -524,8 +566,8 @@
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <img src="images/logo.png" alt="Pittsburgh Ruff Ryders" style="width:130px;height:130px;border-radius:50%;border:3px solid var(--gold);box-shadow:0 0 30px rgba(255,182,18,0.4);margin-bottom:1.25rem;object-fit:cover;" onerror="this.style.display='none'" />
-    <span class="hero-badge">Pittsburgh, PA &nbsp;·&nbsp; 501(c)(3) Nonprofit</span>
+    <img src="images/logo.jpg" alt="Pittsburgh Ruff Ryders" style="width:240px;height:240px;border-radius:50%;border:4px solid var(--gold);box-shadow:0 0 60px rgba(255,182,18,0.6), 0 0 120px rgba(255,182,18,0.25);object-fit:cover;margin-bottom:1.5rem;" onerror="this.style.display='none'" />
+    <span class="hero-badge">Pittsburgh, PA &nbsp;&bull;&nbsp; 501(c)(3) Nonprofit</span>
     <h1>Pittsburgh<br><span>Ruff Ryders</span> Inc.</h1>
     <p class="hero-sub">
       Uniting Pittsburgh youth, families, and community through free programming,
@@ -551,7 +593,7 @@
           dedicated to making a lasting difference in the lives of those who need it most.
         </p>
         <p>
-          We hit the streets day and night — distributing supplies to the homeless,
+          We hit the streets day and night â€” distributing supplies to the homeless,
           partnering with shelters like Light of Life Rescue Mission, and creating
           opportunities for youth and families across every neighborhood in Pittsburgh.
         </p>
@@ -585,7 +627,7 @@
             dedicated to uniting Pittsburgh youth, families, and community through free programming,
             preventive health access, and safe recreational spaces."
           </blockquote>
-          <cite>— Official Mission Statement</cite>
+          <cite>â€” Official Mission Statement</cite>
         </div>
       </div>
     </div>
@@ -602,11 +644,11 @@
     <!-- COMMUNITY OUTREACH -->
     <div class="gallery-section">
       <div class="gallery-section-header">
-        <span class="category-tag">🤝 Community Outreach</span>
+        <span class="category-tag">ðŸ¤ Community Outreach</span>
       </div>
       <h3 class="gallery-section-title">Street Outreach &amp; Supply Drives</h3>
       <p class="gallery-desc">
-        Volunteers hit the streets of downtown Pittsburgh at night — distributing blankets,
+        Volunteers hit the streets of downtown Pittsburgh at night â€” distributing blankets,
         bags of essentials, and warm clothing to those experiencing homelessness. Partnering
         directly with Light of Life Rescue Mission to deliver donations where they're needed most.
       </p>
@@ -617,7 +659,7 @@
         </div>
         <div class="photo-card" onclick="openLightbox(this)">
           <img src="images/outreach-lightoflife-entrance.jpg" alt="Ruff Ryders volunteer at Light of Life entrance" loading="lazy" />
-          <div class="overlay"><span class="photo-caption">Light of Life Rescue Mission — 10 E North Ave</span></div>
+          <div class="overlay"><span class="photo-caption">Light of Life Rescue Mission â€” 10 E North Ave</span></div>
         </div>
         <div class="photo-card" onclick="openLightbox(this)">
           <img src="images/outreach-suv-unload.jpg" alt="Volunteers unloading blue supply bags from SUV" loading="lazy" />
@@ -637,23 +679,23 @@
     <!-- PLACEHOLDER SECTIONS for future photos -->
     <div class="gallery-section">
       <div class="gallery-section-header">
-        <span class="category-tag">🧒 Youth Programs</span>
+        <span class="category-tag">ðŸ§’ Youth Programs</span>
       </div>
       <h3 class="gallery-section-title">Youth &amp; Family Programming</h3>
       <p class="gallery-desc">
-        Free events and activities bringing Pittsburgh youth and families together —
+        Free events and activities bringing Pittsburgh youth and families together â€”
         from organized recreation to mentorship and enrichment programs.
       </p>
       <div class="photo-grid cols-2">
         <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
           <div style="text-align:center; color: var(--muted); padding: 2rem;">
-            <div style="font-size:2rem; margin-bottom:0.5rem;">📸</div>
+            <div style="font-size:2rem; margin-bottom:0.5rem;">ðŸ“¸</div>
             <p style="font-size:0.85rem;">Youth program photos coming soon</p>
           </div>
         </div>
         <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
           <div style="text-align:center; color: var(--muted); padding: 2rem;">
-            <div style="font-size:2rem; margin-bottom:0.5rem;">📸</div>
+            <div style="font-size:2rem; margin-bottom:0.5rem;">ðŸ“¸</div>
             <p style="font-size:0.85rem;">Add your photos to the images folder</p>
           </div>
         </div>
@@ -662,7 +704,7 @@
 
     <div class="gallery-section">
       <div class="gallery-section-header">
-        <span class="category-tag">❤️ Health &amp; Wellness</span>
+        <span class="category-tag">â¤ï¸ Health &amp; Wellness</span>
       </div>
       <h3 class="gallery-section-title">Preventive Health Access</h3>
       <p class="gallery-desc">
@@ -672,13 +714,13 @@
       <div class="photo-grid cols-2">
         <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
           <div style="text-align:center; color: var(--muted); padding: 2rem;">
-            <div style="font-size:2rem; margin-bottom:0.5rem;">📸</div>
+            <div style="font-size:2rem; margin-bottom:0.5rem;">ðŸ“¸</div>
             <p style="font-size:0.85rem;">Health event photos coming soon</p>
           </div>
         </div>
         <div class="photo-card" style="background: #1e2230; display:flex; align-items:center; justify-content:center;">
           <div style="text-align:center; color: var(--muted); padding: 2rem;">
-            <div style="font-size:2rem; margin-bottom:0.5rem;">📸</div>
+            <div style="font-size:2rem; margin-bottom:0.5rem;">ðŸ“¸</div>
             <p style="font-size:0.85rem;">Add your photos to the images folder</p>
           </div>
         </div>
@@ -697,7 +739,7 @@
 
     <div class="donate-card">
       <p>
-        100% of donations go directly to community programming — blankets, meals,
+        100% of donations go directly to community programming â€” blankets, meals,
         supplies, and free events for Pittsburgh youth and families. Every dollar
         stays in Pittsburgh.
       </p>
@@ -732,21 +774,21 @@
           We'd love to hear from you. All-volunteer means every hand counts.
         </p>
         <div class="contact-detail">
-          <div class="contact-icon">📧</div>
+          <div class="contact-icon">ðŸ“§</div>
           <a href="mailto:theblackeconomist20@gmail.com" style="color: var(--text); text-decoration:none;">
             theblackeconomist20@gmail.com
           </a>
         </div>
         <div class="contact-detail">
-          <div class="contact-icon">📍</div>
+          <div class="contact-icon">ðŸ“</div>
           <span>Pittsburgh, Pennsylvania</span>
         </div>
         <div class="contact-detail">
-          <div class="contact-icon">🤝</div>
+          <div class="contact-icon">ðŸ¤</div>
           <span>100% All-Volunteer Organization</span>
         </div>
         <div class="contact-detail">
-          <div class="contact-icon">⚖️</div>
+          <div class="contact-icon">âš–ï¸</div>
           <span>IRS 501(c)(3) Certified Nonprofit</span>
         </div>
       </div>
@@ -771,7 +813,7 @@
     All-Volunteer 501(c)(3) Nonprofit &nbsp;|&nbsp; Pittsburgh, PA
   </p>
   <p style="margin-top: 0.5rem;">
-    Built with ❤️ for the Pittsburgh community
+    Built with â¤ï¸ for the Pittsburgh community
   </p>
 </footer>
 
@@ -815,3 +857,4 @@
 
 </body>
 </html>
+
