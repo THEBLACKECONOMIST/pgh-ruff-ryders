@@ -432,21 +432,7 @@
 
     .photo-card:hover img { transform: scale(1.04); }
 
-    .photo-card .overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      display: flex;
-      align-items: flex-end;
-      padding: 1rem;
-    }
-
-    .photo-card:hover .overlay,
-    .photo-card:focus-visible .overlay { opacity: 1; }
-
-    .photo-caption { color: #fff; font-size: 0.85rem; font-weight: 600; }
+    .photo-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
     .photo-grid.cols-3 .photo-card:first-child {
       grid-row: span 2;
@@ -747,95 +733,62 @@
     <h2 id="gallery-heading" class="section-title">Our Work <span>In the Community</span></h2>
     <div class="divider"></div>
 
-    <!-- COMMUNITY OUTREACH -->
-    <div class="gallery-section">
-      <div class="gallery-section-header">
-        <!-- M-6: aria-hidden on decorative emoji -->
-        <span class="category-tag"><span aria-hidden="true">🤝</span> Community Outreach</span>
-      </div>
-      <h3 class="gallery-section-title">Street Outreach &amp; Supply Drives</h3>
-      <p class="gallery-desc">
-        Volunteers hit the streets of downtown Pittsburgh at night &mdash; distributing blankets,
-        bags of essentials, and warm clothing to those experiencing homelessness. Partnering
-        directly with Light of Life Rescue Mission to deliver donations where they're needed most.
-      </p>
-      <!-- C-3: photo-cards as <button> elements -->
-      <div class="photo-grid cols-3">
-        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Delivering supplies to Light of Life Rescue Mission">
-          <img src="images/outreach-lightoflife-delivery.jpg" alt="Volunteers carrying black bags of donations into Light of Life Rescue Mission at night" loading="lazy" />
-          <div class="overlay" aria-hidden="true"><span class="photo-caption">Delivering supplies to Light of Life Rescue Mission</span></div>
-        </button>
-        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Light of Life Rescue Mission entrance">
-          <img src="images/outreach-lightoflife-entrance.jpg" alt="Ruff Ryders volunteers at the Light of Life Rescue Mission entrance on 10 E North Ave" loading="lazy" />
-          <div class="overlay" aria-hidden="true"><span class="photo-caption">Light of Life Rescue Mission &mdash; 10 E North Ave</span></div>
-        </button>
-        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Unloading supply bags from SUV">
-          <img src="images/outreach-suv-unload.jpg" alt="Volunteers unloading blue supply bags from an SUV on a downtown Pittsburgh street at night" loading="lazy" />
-          <div class="overlay" aria-hidden="true"><span class="photo-caption">Unloading supply bags for distribution</span></div>
-        </button>
-        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Moving supplies through the neighborhood">
-          <img src="images/outreach-street-carry.jpg" alt="Volunteer carrying large black bags through a Pittsburgh neighborhood at night" loading="lazy" />
-          <div class="overlay" aria-hidden="true"><span class="photo-caption">Moving supplies through the neighborhood</span></div>
-        </button>
-        <button class="photo-card" onclick="openLightbox(this)" aria-label="View photo: Smithfield Street outreach run">
-          <img src="images/outreach-smithfield-group.jpg" alt="Ruff Ryders group gathered on Smithfield Street during a nighttime outreach run" loading="lazy" />
-          <div class="overlay" aria-hidden="true"><span class="photo-caption">Smithfield Street outreach run</span></div>
-        </button>
-      </div>
-    </div>
+    <!-- All photos in chronological order, no labels -->
+    <div class="photo-grid cols-3">
 
-    <!-- YOUTH PROGRAMS -->
-    <div class="gallery-section">
-      <div class="gallery-section-header">
-        <span class="category-tag"><span aria-hidden="true">🧒</span> Youth Programs</span>
-      </div>
-      <h3 class="gallery-section-title">Youth &amp; Family Programming</h3>
-      <p class="gallery-desc">
-        Free events and activities bringing Pittsburgh youth and families together &mdash;
-        from organized recreation to mentorship and enrichment programs.
-      </p>
-      <div class="photo-grid cols-2">
-        <div class="photo-card" style="background:#1e2230;display:flex;align-items:center;justify-content:center;" aria-label="Youth program photos coming soon">
-          <div style="text-align:center;color:var(--muted);padding:2rem;">
-            <div style="font-size:2rem;margin-bottom:0.5rem;" aria-hidden="true">📸</div>
-            <p style="font-size:0.85rem;">Youth program photos coming soon</p>
-          </div>
-        </div>
-        <div class="photo-card" style="background:#1e2230;display:flex;align-items:center;justify-content:center;" aria-label="More photos coming soon">
-          <div style="text-align:center;color:var(--muted);padding:2rem;">
-            <div style="font-size:2rem;margin-bottom:0.5rem;" aria-hidden="true">📸</div>
-            <p style="font-size:0.85rem;">Add your photos to the images folder</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/outreach-lightoflife-delivery.jpg" alt="Volunteers carrying donations into Light of Life Rescue Mission at night" loading="lazy" />
+      </button>
 
-    <!-- HEALTH & WELLNESS -->
-    <div class="gallery-section">
-      <div class="gallery-section-header">
-        <span class="category-tag"><span aria-hidden="true">❤️</span> Health &amp; Wellness</span>
-      </div>
-      <h3 class="gallery-section-title">Preventive Health Access</h3>
-      <p class="gallery-desc">
-        Connecting Pittsburgh residents with free preventive health resources,
-        health fairs, screenings, and wellness programming throughout the community.
-      </p>
-      <div class="photo-grid cols-2">
-        <div class="photo-card" style="background:#1e2230;display:flex;align-items:center;justify-content:center;" aria-label="Health event photos coming soon">
-          <div style="text-align:center;color:var(--muted);padding:2rem;">
-            <div style="font-size:2rem;margin-bottom:0.5rem;" aria-hidden="true">📸</div>
-            <p style="font-size:0.85rem;">Health event photos coming soon</p>
-          </div>
-        </div>
-        <div class="photo-card" style="background:#1e2230;display:flex;align-items:center;justify-content:center;" aria-label="More photos coming soon">
-          <div style="text-align:center;color:var(--muted);padding:2rem;">
-            <div style="font-size:2rem;margin-bottom:0.5rem;" aria-hidden="true">📸</div>
-            <p style="font-size:0.85rem;">Add your photos to the images folder</p>
-          </div>
-        </div>
-      </div>
-    </div>
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/outreach-lightoflife-entrance.jpg" alt="Ruff Ryders volunteers at Light of Life Rescue Mission entrance" loading="lazy" />
+      </button>
 
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/supplyprep-packing.jpg" alt="Volunteer packing supply bags for community outreach" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/supplyprep-sorting.jpg" alt="Volunteer sorting supply bags for community outreach" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/outreach-smithfield-group.jpg" alt="Ruff Ryders group on Smithfield Street nighttime outreach" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/outreach-smithfield-group2.jpg" alt="Ruff Ryders group on Smithfield Street wider view" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/outreach-street-carry.jpg" alt="Volunteer carrying supplies through Pittsburgh neighborhood at night" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/outreach-street-carry2.jpg" alt="Volunteer walking with two large supply bags through Pittsburgh at night" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/outreach-suv-unload.jpg" alt="Three volunteers unloading blue supply bags from SUV on Pittsburgh street" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/outreach-suv-unload2.jpg" alt="Volunteers gathering around SUV for supply distribution at night" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/outreach-suv-distribution.jpg" alt="Ruff Ryders volunteers distributing blue supply bags from SUV" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/event-backpack-giveaway.jpg" alt="Pittsburgh Ruff Ryders Backpack Giveaway event flyer" loading="lazy" />
+      </button>
+
+      <button class="photo-card" onclick="openLightbox(this)" aria-label="View community photo">
+        <img src="images/event-motorcycle-ride.jpg" alt="Ruff Ryders motorcycle ride through downtown Pittsburgh" loading="lazy" />
+      </button>
+
+    </div>
   </div>
 </section>
 
