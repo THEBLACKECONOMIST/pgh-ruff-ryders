@@ -843,9 +843,19 @@
         100% of donations go directly to community programming &mdash; blankets, meals,
         supplies, and free events for Pittsburgh youth and families. Every dollar stays in Pittsburgh.
       </p>
-      <a href="mailto:ruffryders412@gmail.com?subject=Donation%20Inquiry%20-%20Pittsburgh%20Ruff%20Ryders" class="btn btn-gold">
-        Contact Us to Donate
-      </a>
+
+      <!-- PayPal Donate Button -->
+      <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block;margin-bottom:1rem;">
+        <input type="hidden" name="business" value="ruffryders412@gmail.com" />
+        <input type="hidden" name="item_name" value="Pittsburgh Ruff Ryders Inc. Donation" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="hidden" name="no_recurring" value="0" />
+        <button type="submit" class="btn" style="background:#0070BA;color:#fff;display:flex;align-items:center;gap:0.6rem;font-size:1.1rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.313 2.42 1.07 4.148-.011.08-.023.16-.038.243-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.08-.019.118-.09.541zm2.93-15.666h1.876c2.62 0 3.717-1.124 4.001-3.548.16-1.374-.157-2.114-.75-2.573-.574-.444-1.54-.595-2.87-.595H9.31L8.014 5.671h1.992zm9.927.186h1.876c2.62 0 3.716-1.124 4-3.548.16-1.374-.157-2.114-.75-2.573-.573-.444-1.54-.595-2.869-.595h-2.953l-1.295 6.716h1.991z"/></svg>
+          Donate with PayPal
+        </button>
+      </form>
+
       <div class="donate-methods">
         <span class="donate-method">Cash App</span>
         <span class="donate-method">Zelle</span>
